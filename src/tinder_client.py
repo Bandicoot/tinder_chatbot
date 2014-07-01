@@ -25,6 +25,12 @@ class TinderClient(object):
             self.headers['X-Auth-Token'] = self.token
             self.headers['Authorization'] = 'Token token="{}"'.format(self.token)
 
+    def dislike(self, uid):
+        self._get('pass/{}'.format(uid))
+
+    def like(self, uid):
+        return self._get('like/{}'.format(uid))['match']
+
     def get_recs(self):
         return self._get('user/recs')
 
