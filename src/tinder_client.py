@@ -25,6 +25,9 @@ class TinderClient(object):
             self.headers['X-Auth-Token'] = self.token
             self.headers['Authorization'] = 'Token token="{}"'.format(self.token)
 
+    def get_recs(self):
+        return self._get('user/recs')
+
     def ping(self, location=default_loc):
         self.location = location
         self._post('user/ping', self.location)
