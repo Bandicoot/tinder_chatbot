@@ -33,6 +33,9 @@ class TinderClient(object):
     def like(self, uid):
         return self._get('like/{}'.format(uid))['match']
 
+    def send_message(self, match_id, message):
+        return self._post('user/matches/{}'.format(match_id), {'message': message})
+
     def get_likes(self):
         return self._post('feed/likes', {
             'last_moment_id': self.last_moment_id,
