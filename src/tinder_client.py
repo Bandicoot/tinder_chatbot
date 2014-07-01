@@ -43,6 +43,9 @@ class TinderClient(object):
     def get_recs(self):
         return self._get('user/recs')
 
+    def get_user(self, uid):
+        return self._get('user/{}'.format(uid))['results']
+
     def ping(self, location=default_loc):
         self.location = location
         self._post('user/ping', self.location)
