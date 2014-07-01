@@ -9,6 +9,8 @@ class TinderClient(object):
     def __init__(self, token=None, location=default_loc):
         self.token = token
         self.location = location
+        self.last_moment_id = '523aa34354bfa7e87700148f9aca0c4c3cf547da95293270532e9058'
+        self.last_activity_date = ''
         self.base_uri = 'https://api.gotinder.com'
         self.headers = {
             'Content-Type': 'application/json; charset=utf-8',
@@ -30,6 +32,13 @@ class TinderClient(object):
 
     def like(self, uid):
         return self._get('like/{}'.format(uid))['match']
+
+    def get_likes(self):
+        return self._post('feed/likes', {
+            'last_moment_id': self.last_moment_id,
+            # The last_activity_date always seems to empty when using this endpoint
+            'last_activity_date': ''
+            })['likes']
 
     def get_recs(self):
         return self._get('user/recs')
