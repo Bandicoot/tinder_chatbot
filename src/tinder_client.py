@@ -38,7 +38,7 @@ class TinderClient(object):
             'last_moment_id': self.last_moment_id,
             # The last_activity_date always seems to empty when using this endpoint
             'last_activity_date': ''
-            })['likes']
+        })['likes']
 
     def get_recs(self):
         return self._get('user/recs')
