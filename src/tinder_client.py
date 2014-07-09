@@ -1,5 +1,4 @@
-import requests
-import json
+import requests, json, datetime
 
 
 class TinderClient(object):
@@ -35,6 +34,13 @@ class TinderClient(object):
 
     def send_message(self, match_id, message):
         return self._post('user/matches/{}'.format(match_id), {'message': message})
+
+    def get_updates(self, last_activity=datetime.datetime.utcnow().isoformat()):
+        """Returns all updates since last_activity.
+        Updates consist of new matches, blocks, lists, and messages.
+        If last_activity is null or invalid, returns all updates.
+        """
+        return self._post('updates', {'last_activity_date': last_activity})
 
     def get_likes(self):
         return self._post('feed/likes', {
