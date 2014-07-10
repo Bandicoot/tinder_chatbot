@@ -88,6 +88,7 @@ class TinderClient(object):
         if not res.ok:
             raise TinderException(res.text, res.status_code)
 
+
 class TinderException(Exception):
 
     def __init__(self, description, error_code=None):
