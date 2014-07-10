@@ -11,10 +11,19 @@ class ChatterBot(object):
         self.recs = self.tinder_client.get_recs()
         self.matches = {}
 
+        self.update_handlers = {}
+
     def choose_match(self):
         rec = self.recs.pop(0)['_id']
         handler = random.choice([self.tinder_client.like, self.tinder_client.dislike])
         handler(rec)
+
+    def get_and_handle_updates(self):
+        updates = self.tinder_client.get_updates()
+        for update_type, update in updates.iteritems():
+            handler = self.update_handlers.get(update_type)
+            if handler:
+                handler(update)
 
     def start(self):
         if not self.is_running:
