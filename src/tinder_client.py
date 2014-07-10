@@ -53,7 +53,7 @@ class TinderClient(object):
         })['likes']
 
     def get_recs(self):
-        return self._get('user/recs')
+        return self._get('user/recs')['results']
 
     def get_user(self, uid):
         return self._get('user/{}'.format(uid))['results']
