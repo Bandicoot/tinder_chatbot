@@ -30,6 +30,9 @@ class TinderClient(object):
         self._get('pass/{}'.format(uid))
 
     def like(self, uid):
+        """Likes (swipes right on) the supplied UID.
+        Returns a boolean representing whether a match was found.
+        """
         return self._get('like/{}'.format(uid))['match']
 
     def send_message(self, match_id, message):
